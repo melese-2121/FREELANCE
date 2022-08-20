@@ -4,8 +4,6 @@ const { Op } = require('sequelize');
 const site = require('./Routes/site');
 const admin = require('./Routes/admin');
 
-
-
 // Create and new instance of express(App)
 const app = express();
 // Set view engine
