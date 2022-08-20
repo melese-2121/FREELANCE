@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./admin/header.html')  %> 
+
+
+<body>
+<%- include('./admin/nav.html')  %>
+
+<form action="/admin/add_job" method="POST">
+   <div class="container"> 
+    <div>
+    <label for="company">Company:</label><br>
+    <input type="text" name="company" placeholder="Write company name here..." required>
+    </div>
+
+    <div>
+    <label for="Location">Location:</label><br>
+    <input type="text" name="location" placeholder="Location of the company" required>
+    </div>
+
+    <div>
+        <label for="requirements">Requirements:</label><br>
+        <textarea name="requirements" placeholder="Requirements of education from applier" id="requirements" cols="30" rows="4"></textarea>
+    </div>
+
+    <div>
+        <label for="initial">Document submition starting time:</label><br>
+        <input type="date" name="initial"  required>
+    </div>
+
+    <div>
+        <label for="final">Document submition final time:</label><br>
+        <input type="date" name="final"  required>
+    </div>
+
+    <button id="submit">ADD JOB</button>
+</div>
+</form>
+
+<%- include('./admin/footer.html')  %> 
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+        .container{
+            border: 1px black solid;
+            margin-left: 15%;
+            margin-right: 15%;
+            margin-top: 10%;
+            background-color: rgb(221, 214, 214);
+        }
+        h1{
+            text-align: center;
+            margin-top: 5%;
+            color: rgb(0, 0, 128);
+            font-family: Georgia, 'Times New Roman', Times, serif;        
+        }
+        .div{
+            margin-left: 10%;
+            margin-right: 10%;
+            background-color: rgb(212, 209, 206);
+            border: 1px black solid;
+            padding-left: 3%;
+        }
+        h3{
+            color: rgb(137, 180, 64);
+        }
+        p{
+            margin-left: 2%
+        }
+
+
+    </style>
+    <%- include('./content/header.html')  %> 
+<body>
+
+    <%- include('./content/nav.html') %> 
+    
+    <%- include('./content/form.html') %> 
+
+    <div class="container">
+        <h1>previously commented</h1>
+
+    <% let count = 0; feedbacks.forEach((feedback) => {
+        if(count < 10){
+        %>
+
+        <div class="div">
+            <h3><%= feedback.email %></h3>
+            <p><%= feedback.body %></p> 
+         </div>
+    <%
+        }
+        count++;
+   })%>
+     
+    </div>
+
+    <%- include('./content/footer.html')  %> 
+
+</body>
+</html>

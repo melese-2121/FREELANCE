@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+        .notifications{
+            display: flex;
+        }
+        
+        p{
+            margin-left: 33%;
+        }
+        h2{
+            text-align: center;
+            color: rgb(39, 233, 39);
+        }
+        span{
+            font-weight: bold;
+        }
+        .list{
+            background-color: rgb(250, 231, 231);
+            color: rgb(53, 51, 51);
+        }
+    </style>
+   <%- include('./content/header.html')  %> 
+<body>
+    <%- include('./content/nav.html') %> 
+    <h2>
+        Recently added
+    </h2>
+    <div class="notifications">
+    <% notifications.map((notification) => { %>
+        <div class="list">
+        <p><span>Department</span><br> <%= notification.department %> </p>
+        <p><span>Company</span> <br><%= notification.company %> </p>
+        <p><span>Requirements</span> <br><%= notification.requirements %> </p>
+        <p><span>Submition_date</span> <br><%= notification.submition_date %> </p>
+        <p><span>Job_descreption</span> <br><%= notification.job_descreption %> </p>
+        </div>
+        <%  }) %> 
+    </div>
+
+    <%- include('./content/footer.html')  %> 
+</body>
+</html>
