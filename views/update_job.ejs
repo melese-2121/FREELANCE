@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./admin/header.html') %>
+  <style>
+    body{
+        background-color: rgb(98, 92, 92);
+    }
+    .search {
+      margin: 5% 15%;
+      display: flex;
+    }
+    #search {
+      width: 50%;
+      height: 50px;
+      font-size: 20px;
+      background-color: rgb(159, 159, 100);
+      margin: 5px 10px;
+      font-weight: bold;
+    }
+    .btn {
+      cursor:pointer;
+      width: 10%;
+      margin-top: 8px;
+      margin-bottom: 8px;
+      background-color: blue;
+      font-weight: bold;
+    }
+    #label{
+        margin-top: 20px;
+        color: aqua;
+        font-size: 20px;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+    h1{
+        text-align: center;
+    }
+    .edit{
+        background-color: rgb(32, 29, 29);
+        color: white;
+        padding: 2% 0%;
+    }
+    .data{
+        margin:3% 15%;
+        background-color: rgb(12, 78, 90);
+        padding: 10px 5%;
+        color: rgb(155, 253, 222);
+    }
+    span{
+        color: white;
+    }
+  </style>
+
+  <body>
+      <%- include('./admin/nav.html') %>
+      
+      <form action="/admin/edit_job/update" method="POST" >
+          <div class="search">
+              <label for="search" id="label">Search by job id:</label>
+              <input
+              name="search_id"
+              type="text"
+              id="search"
+              placeholder="Write the job id here..."
+              />
+              <button type="submit" class="btn">search</button>
+            </div>
+        </form>
+        
+    
+       <% if(job){ %>
+        <div class="data">
+        <h1>Found old data</h1>
+        <h3><span>Company:</span> <%=job.company  %> </h3>
+        <h3><span>Location:</span> <%=job.location  %> </h3>
+        <h3><span>Requirements:</span> <%=job.requirements  %> </h3>
+        <h3><span>Initial:</span> <%=job.initial  %> </h3>
+        <h3><span>Final:</span> <%=job.final  %> </h3>
+        </div>
+      <% }else{ %>
+        <h1 style="color: rgb(253, 61, 61)">No job is found with this id!</h1>
+      <%} %> 
+    
+    <% if(job) { %>
+        <form action="/admin/edit_job/update" method="POST" class="edit">
+            <h1>Edit form</h1>
+          <div class="container">
+            <div>
+              <label for="company" class="label">Company:</label><br />
+              <input
+                type="text"
+                name="company"
+                placeholder="Write company name here..."
+                value="<%=job.company  %> "
+                required
+              />
+            </div>
+    
+            <div>
+              <label for="Location">Location:</label><br />
+              <input
+                type="text"
+                name="location"
+                placeholder="Location of the company"
+                value="<%= job.location  %> "
+                required
+              />
+            </div>
+    
+            <div>
+              <label for="requirements">Requirements:</label><br />
+              <textarea
+                name="requirements"
+                placeholder="Requirements of education from applier"
+                id="requirements"
+                cols="30"
+                rows="4"
+                
+              ></textarea>
+            </div>
+    
+            <div>
+              <label for="initial">Document submition starting time:</label><br />
+              <input type="date" name="initial"  required />
+            </div>
+    
+            <div>
+              <label for="final">Document submition final time:</label><br />
+              <input type="date"  name="final" required />
+            </div>
+    
+            <button id="submit">EDIT JOB</button>
+          </div>
+        </form>
+    <% } %> 
+
+    <%- include('./admin/footer.html') %>
+  </body>
+</html>

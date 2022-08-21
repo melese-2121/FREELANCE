@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <style>
+    .job-list {
+      background-color: rgb(153, 147, 147);
+      margin: 0% 15%;
+      padding: 1% 10%;
+    }
+    body {
+      background-color: rgb(78, 73, 73);
+    }
+    
+    .a :hover{
+        border: 5px solid rgb(155, 58, 246);
+        margin-right: 14%;
+        margin-left: 14%;
+        font-size: 16px;
+    }
+    span{
+        font-weight: bold;
+        font-size: 18px;
+        color:rgb(4, 3, 4);
+    }
+  </style>
+
+  <%- include('./admin/header.html') %>
+
+  <body>
+    <%- include('./admin/nav.html') %> <% jobs.forEach((job) => {%>
+    <a href="#" class="a">
+      <div class="job-list">
+        <p><span>Company:</span> <%= job.company %></p>
+        <p><span>Location:</span> <%= job.location %></p>
+        <p><span>Requirements:</span> <%= job.requirements %></p>
+        <p><span>Initial Date: </span><%= job.initial %></p>
+        <p><span>Final Date:</span> <%= job.final %></p>
+      </div>
+    </a>
+    <br />
+    <%}) %> <%- include('./admin/footer.html') %>
+  </body>
+</html>

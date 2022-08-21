@@ -19,6 +19,10 @@ module.exports = sequelize.define('jobs', {
         type: DataTypes.STRING,
         allowNull: false,
     },
+    requirements:{
+        type: DataTypes.STRING,
+        allowNull: false
+    },
     initial:{
         type: DataTypes.DATE,
         allowNull: false

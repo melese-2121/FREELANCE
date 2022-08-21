@@ -4,6 +4,7 @@ const sequelize = new Sequelize('freelance_db', 'root', '', {
     host: 'localhost'
 })
 
+
 sequelize.authenticate()
          .then(() => {
             console.log("CONNECTED!");

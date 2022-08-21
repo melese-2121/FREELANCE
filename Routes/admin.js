@@ -3,8 +3,29 @@ const router = express.Router();
 
 // Require DB connection
 const sequelize = require("../connection/db");
-// Require job model
-const Job = require("../models/job");
+// Require Job table
+const job = require('../models/Job');
+
+// Define fetch data middleware
+const fetch_data = async (req, res, next) => {
+  global.jobs = await job.findAll();
+  next();
+}
+
+// Define search job middleware
+const search_job = async (req, res, next) => {
+  const { search_id } = req.body;
+
+  global.data = await job.findOne({
+    where: {
+      id: search_id
+    }
+
+  })
+  
+
+  next();
+}
 
 router.get("/", (req, res) => {
   res.render("admin", {});
@@ -23,7 +44,7 @@ router.post("/add_job", (req, res) => {
     .then((data) => {
 
         // Add a new job
-      return Job.create({
+      return job.create({
         company: company,
         location: location,
         requirements: requirements,
@@ -37,7 +58,7 @@ router.post("/add_job", (req, res) => {
       console.log("Error: ", err);
     });
 
-  res.send("Welcome");
+  res.send('Welcome');
 });
 
 router.get("/edit_job", (req, res) => {
@@ -45,21 +66,30 @@ router.get("/edit_job", (req, res) => {
 });
 
 // Edit_job job
-router.put("/edit_job/update", (req, res) => {
-  res.send('Welcome')
+router.get("/edit_job/update", (req, res) => {
+
+  res.render('update_job', {job: global.data});
 })
 // Delete job
 router.delete("/edit_job/delete", (req, res) => {
   res.send('Welcome')
 })
 // Update a job
-router.put("/edit_job/update", (req, res) => {
-  res.send('Welcome')
+router.post("/edit_job/update", search_job, (req, res) => {
+  const { search_id } = req.body;
+  const job = global.data;
+  console.log(global.data)
+  res.render('update_job', {
+    job
+  })
 })
+
 // Show all job list 
-router.get("/edit_job/show", (req, res) => {
-  res.send('Welcome')
+router.get("/edit_job/show", fetch_data, (req, res) => {
+  const jobs = global.jobs;
+  res.render('show_jobs', { jobs });
 })
+
 
 
 module.exports = router;
