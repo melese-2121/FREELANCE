@@ -14,16 +14,32 @@ const fetch_data = async (req, res, next) => {
 
 // Define search job middleware
 const search_job = async (req, res, next) => {
-  const { search_id } = req.body;
 
-  global.data = await job.findOne({
-    where: {
-      id: search_id
-    }
+  global.search_id = req.body.search_id;
+  if(search_id){
+    global.data = await job.findOne({
+      where: {
+        id: search_id
+      }
+    })
+  }
+  next();
+}
 
-  })
-  
+// Define update job middleware
+const update_job = async (req, res, next) => {
+  const { company, location, requirements, initial, final } = req.body;
 
+  if(global.search_id){
+    const newJob = await job.update({
+      company: company,
+      location: location,
+      requirements: requirements,
+      initial: initial,
+      final: final
+    }, { where: { id: global.search_id}});
+    console.log(newJob)
+  }
   next();
 }
 
@@ -75,12 +91,11 @@ router.delete("/edit_job/delete", (req, res) => {
   res.send('Welcome')
 })
 // Update a job
-router.post("/edit_job/update", search_job, (req, res) => {
+router.post("/edit_job/update", search_job, update_job, (req, res) => {
   const { search_id } = req.body;
-  const job = global.data;
-  console.log(global.data)
+
   res.render('update_job', {
-    job
+    job: global.data
   })
 })
 
@@ -89,7 +104,6 @@ router.get("/edit_job/show", fetch_data, (req, res) => {
   const jobs = global.jobs;
   res.render('show_jobs', { jobs });
 })
-
 
 
 module.exports = router;
