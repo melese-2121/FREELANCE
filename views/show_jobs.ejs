@@ -27,7 +27,7 @@
 
   <body>
     <%- include('./admin/nav.html') %> <% jobs.forEach((job) => {%>
-    <a href="#" class="a">
+    <a href="/admin/edit_job" class="a">
       <div class="job-list">
         <p><span>Company:</span> <%= job.company %></p>
         <p><span>Location:</span> <%= job.location %></p>

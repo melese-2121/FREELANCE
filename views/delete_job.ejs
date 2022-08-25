@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./admin/header.html') %>
+  <style>
+    body{
+        background-color: rgb(98, 92, 92);
+    }
+    .search {
+      margin: 5% 15%;
+      display: flex;
+    }
+    #search {
+      width: 50%;
+      height: 50px;
+      font-size: 20px;
+      background-color: rgb(159, 159, 100);
+      margin: 5px 10px;
+      font-weight: bold;
+    }
+    .btn {
+      cursor:pointer;
+      width: 10%;
+      margin-top: 8px;
+      margin-bottom: 8px;
+      background-color: blue;
+      font-weight: bold;
+    }
+    h1{
+        text-align: center;
+        color: chartreuse;
+    }
+    .data{
+        margin:3% 15%;
+        background-color: rgb(17, 79, 89);
+        padding: 10px 5%;
+        color: rgb(155, 253, 222);
+    }
+    span{
+        color: white;
+    }
+    #submit{
+      font-size: 20px;
+      width: 35%;
+      margin-left: 30%;
+      background-color: red;
+    }
+  </style>
+
+  <body>
+      <%- include('./admin/nav.html') %>
+      
+      <form action="/admin/edit_job/delete" method="POST" >
+          <div class="search">
+              <label for="search" id="label">Search by job id:</label>
+              <input
+              name="search_id"
+              type="text"
+              id="search"
+              placeholder="Write the job id here..."
+              />
+              <button type="submit" class="btn">search</button>
+          </div>
+        </form>
+        
+    
+       <% if(job){ %>
+        <div class="data">
+        <h1>Found data to be deleted</h1>
+        <h3><span>Company:</span> <%=job.company  %> </h3>
+        <h3><span>Location:</span> <%=job.location  %> </h3>
+        <h3><span>Requirements:</span> <%=job.requirements  %> </h3>
+        <h3><span>Initial:</span> <%=job.initial  %> </h3>
+        <h3><span>Final:</span> <%=job.final  %> </h3>
+        <% if(job) { %>
+          <form action="/admin/edit_job/delete" method="POST" class="edit">  
+              <button id="submit">Delete</button>
+          </form>
+      <% } %> 
+        </div>
+      <% }else{ %>
+        <h1 style="color: rgb(253, 61, 61)">No job is found with this id!</h1>
+      <%} %> 
+    
+    
+
+    <%- include('./admin/footer.html') %>
+  </body>
+</html>

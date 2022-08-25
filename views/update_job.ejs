@@ -33,6 +33,7 @@
     }
     h1{
         text-align: center;
+        color: blueviolet;
     }
     .edit{
         background-color: rgb(32, 29, 29);
@@ -48,6 +49,11 @@
     span{
         color: white;
     }
+    #submit{
+      background-color: rgb(246, 178, 7);
+      font-size: 20px;
+      font-weight: bold;
+    }
   </style>
 
   <body>
@@ -55,7 +61,7 @@
       
       <form action="/admin/edit_job/update" method="POST" >
           <div class="search">
-              <label for="search" id="label">Search by job id:</label>
+              <label for="search" id="label">Search job to be deleted by id:</label>
               <input
               name="search_id"
               type="text"
@@ -82,7 +88,7 @@
     
     <% if(job) { %>
         <form action="/admin/edit_job/update" method="POST" class="edit">
-            <h1>Edit form</h1>
+            <h1>Updating form</h1>
           <div class="container">
             <div>
               <label for="company" class="label">Company:</label><br />
@@ -128,7 +134,7 @@
               <input type="date"  name="final" required />
             </div>
     
-            <button id="submit">EDIT JOB</button>
+            <button id="submit">Edit job</button>
           </div>
         </form>
     <% } %> 
